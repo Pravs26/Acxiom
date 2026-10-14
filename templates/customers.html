@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers | AcxiomCRM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header><h1>Customer Management</h1></header>
+    <main>
+        <h2>Add Customer</h2>
+
+        <form method="POST">
+            <input name="name" placeholder="Customer name" required>
+            <input name="email" type="email" placeholder="Email address" required>
+            <input name="phone" placeholder="Phone number" required>
+            <input name="company" placeholder="Company" required>
+            <button type="submit">Add Customer</button>
+        </form>
+
+        <h2>Customer List</h2>
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>ID</th><th>Name</th><th>Email</th>
+                    <th>Phone</th><th>Company</th><th>Action</th>
+                </tr>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.name }}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.phone }}</td>
+                    <td>{{ customer.company }}</td>
+                    <td>
+                        <form method="POST"
+                              action="{{ url_for('delete_customer', customer_id=customer.id) }}">
+                            <button class="delete" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr><td colspan="6">No customers added yet.</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <a class="back" href="{{ url_for('home') }}">Back to Dashboard</a>
+    </main>
+</body>
+</html>

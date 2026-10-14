@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcxiomCRM Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>AcxiomCRM</h1>
+        <p>Customer Relationship Management</p>
+    </header>
+
+    <main>
+        <h2>Dashboard</h2>
+
+        <div class="cards">
+            <div class="card">
+                <h3>Total Customers</h3>
+                <p>{{ customers }}</p>
+            </div>
+            <div class="card">
+                <h3>Total Leads</h3>
+                <p>{{ leads }}</p>
+            </div>
+        </div>
+
+        <nav>
+            <a href="{{ url_for('manage_customers') }}">Manage Customers</a>
+            <a href="{{ url_for('manage_leads') }}">Manage Leads</a>
+        </nav>
+    </main>
+</body>
+</html>

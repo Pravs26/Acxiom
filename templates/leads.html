@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leads | AcxiomCRM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header><h1>Lead Management</h1></header>
+    <main>
+        <h2>Add Lead</h2>
+
+        <form method="POST">
+            <input name="name" placeholder="Lead name" required>
+            <input name="source" placeholder="Lead source" required>
+            <select name="status">
+                <option>New</option>
+                <option>Contacted</option>
+                <option>Converted</option>
+            </select>
+            <button type="submit">Add Lead</button>
+        </form>
+
+        <h2>Lead List</h2>
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>ID</th><th>Name</th><th>Source</th>
+                    <th>Status</th><th>Action</th>
+                </tr>
+                {% for lead in leads %}
+                <tr>
+                    <td>{{ lead.id }}</td>
+                    <td>{{ lead.name }}</td>
+                    <td>{{ lead.source }}</td>
+                    <td>{{ lead.status }}</td>
+                    <td>
+                        <form method="POST"
+                              action="{{ url_for('delete_lead', lead_id=lead.id) }}">
+                            <button class="delete" type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% else %}
+                <tr><td colspan="5">No leads added yet.</td></tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <a class="back" href="{{ url_for('home') }}">Back to Dashboard</a>
+    </main>
+</body>
+</html>
